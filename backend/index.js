@@ -2,15 +2,11 @@ const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
 const path = require("path");
-
 const fs = require("fs");
 const app = express();
-
 const uploadedDir = path.join(__dirname, "uploaded/");
-
 app.use(cors());
 app.use("/files", express.static("uploaded"));
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploaded");
@@ -25,7 +21,6 @@ app.post("/upload", (req, res) => {
         if (err) {
             return res.status(500).json(err);
         }
-
         return res.status(200).send(req.files);
     });
 });
